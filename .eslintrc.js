@@ -18,11 +18,15 @@ module.exports = {
   rules: {
     'no-console': 'warn',
     'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'off',
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
     'arrow-body-style': 'off',
     'react/jsx-filename-extension': 'off',
     'prefer-const': 'error',
+    'react/prop-types': 'warn',
+    'jsx-a11y/anchor-is-valid': 'off',
+    'no-unused-vars': 'warn',
+    'import/no-unresolved': 'off',
+    'react/jsx-props-no-spreading': 'off',
   },
 };
