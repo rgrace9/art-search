@@ -9,12 +9,9 @@
     "lint:js:fix": "npm run eslint . --ext .js,.jsx --fix",
     "prepare": "husky install"
   },
-  "husky": {
-    "hooks": {
-        "pre-commit": "lint-staged",
-        "pre-push": "npm test"
-    }
-},
+  "pre-commit": "lint-staged",
+
+
   "lint-staged": {
     "*.{js,jsx}": [
       "prettier --write",
