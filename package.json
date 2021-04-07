@@ -6,12 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint:js:fix": "npm run eslint . --ext .js,.jsx --fix"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "lint:js:fix": "npm run eslint . --ext .js,.jsx --fix",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -22,7 +18,8 @@
     "*.{html,css,less,ejs}": [
       "prettier --write",
       "git add"
-    ]
+    ],
+    "*.js": "eslint --cache --fix"
   },
   "dependencies": {
     "next": "^10.0.0",
