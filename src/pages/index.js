@@ -1,22 +1,6 @@
-import Head from 'next/head'
+import Head from 'next/head';
 
 export default function Home() {
-
-//   console.log('one');
-// const ww = process.env.NODE_ENV.trim.toLowerCase();
-// if (ww === 'production') {
-//   console.log('Another one');
-// } else {
-//   console.log('test');
-// }
-
-console.log('one');
-var ww = process.env.NODE_ENV.trim.toLowerCase();
-if (ww === 'production') {
-  console.log('Another one');
-} else {
-  console.log('test');
-}
   return (
     <div className="container">
       <Head>
@@ -46,16 +30,14 @@ if (ww === 'production') {
 
           <a
             href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
+            className="card">
             <h3>Examples &rarr;</h3>
             <p>Discover and deploy boilerplate example Next.js projects.</p>
           </a>
 
           <a
             href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
+            className="card">
             <h3>Deploy &rarr;</h3>
             <p>
               Instantly deploy your Next.js site to a public URL with Vercel.
@@ -68,8 +50,7 @@ if (ww === 'production') {
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           Powered by{' '}
           <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
         </a>
@@ -221,5 +202,5 @@ if (ww === 'production') {
         }
       `}</style>
     </div>
-  )
+  );
 }
