@@ -31,7 +31,12 @@ export default function Home() {
   return (
     <>
       <GlobalStyle />
-      <Layout>hello world</Layout>
+      <Layout>
+        <SearchHero />
+        <div style={{height: '1000px'}}>
+          hello world
+        </div>
+      </Layout>
     </>
   );
 }
