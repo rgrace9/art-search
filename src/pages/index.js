@@ -1,4 +1,5 @@
 import Layout from 'components/Layout';
+import SearchHero from 'features/SearchHero';
 import { createGlobalStyle, ServerStyleSheet } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
@@ -8,7 +9,10 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
   }
   body {
+    font-family: 'Lexend', sans-serif;
+    
     color: ${props => (props.whiteColor ? 'white' : '#130D05')};
+    background-color: #72695d;
   }
   * {
     margin: 0;
@@ -18,6 +22,9 @@ export const GlobalStyle = createGlobalStyle`
   *::before,
   *::after {
     box-sizing: inherit;
+  }
+  a {
+    text-decoration: none;
   }
 `;
 export default function Home() {

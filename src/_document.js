@@ -33,6 +33,11 @@ export default class MyDocument extends Document {
       <html lang="en">
         <Head>
           <title>My page</title>
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700;800&display=swap"
+            rel="stylesheet"
+          />
           {/* Step 5: Output the styles in the head  */}
           {this.props.styleTags}
         </Head>
