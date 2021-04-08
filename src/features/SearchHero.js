@@ -1,21 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledHeroContainer = styled.section`
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  min-height: 600px;
 
-`
 
 const StyledHero = styled.div`
   background-image: url('/images/denial-of-saint-peter.jpeg');
-  /* background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; */
-  /* height: 50%; */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -23,15 +12,27 @@ const StyledHero = styled.div`
   /* height: 50vh; */
   height: 75vh;
   /* height: 600px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const StyledHeroContent = styled.section`
+
+  margin: auto;
+  background-color: hsla(0, 25%, 100%, 0.30);
+  padding: 20px 40px;
+  width: 75%;
+
 `
 const SearchHero = () => {
   return (
-    // <StyledHeroContainer>
-
-      <StyledHero>
-        <p>hey</p>
+    
+    <StyledHero>
+        <StyledHeroContent>
+        <p style={{color: 'black', fontSize: '36px'}}>Search Bar</p>
+     </StyledHeroContent>
       </StyledHero>
-    // </StyledHeroContainer>
     
   );
 };
