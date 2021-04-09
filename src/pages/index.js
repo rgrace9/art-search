@@ -7,10 +7,12 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <SearchHero />
-        <div style={{height: '1000px'}}>
-          hello world
-        </div>
+        <main>
+          <SearchHero />
+          <div style={{height: '1000px'}}>
+            hello world
+          </div>
+        </main>
       </Layout>
     </>
   );

@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledHeader = styled.header`
-  padding: 20px 20px;
+  padding: 10px 10px;
   background-color: #78745b;
   box-shadow: 0px 1px 5px #130d05;
 `;
@@ -19,15 +19,17 @@ const StyledLink = styled.a`
   &:hover {
     background-color: black;
     text-decoration: none;
-    box-shadow: 0 0 0 2pt red;
+    box-shadow: 0 0 0 2pt #46a340;
   }
 `;
 const Header = props => {
   return (
     <StyledHeader>
-      <Link href="/">
-        <StyledLink href="/">Met Museum Search</StyledLink>
-      </Link>
+      <h1>
+        <Link href="/">
+          <StyledLink href="/">Met Museum Search</StyledLink>
+        </Link>
+      </h1>
     </StyledHeader>
   );
 };
