@@ -13,6 +13,7 @@ const StyledLink = styled.a`
   color: #fdf8d6;
   font-size: 1.6rem;
   padding: 2px 5px;
+  font-family: 'Julius Sans One', sans-serif;
   &:focus,
   &:hover {
     background-color: black;
