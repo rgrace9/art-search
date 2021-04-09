@@ -14,10 +14,12 @@ const StyledLink = styled.a`
   font-size: 1.6rem;
   padding: 2px 5px;
   font-family: 'Julius Sans One', sans-serif;
+  outline: none;
   &:focus,
   &:hover {
     background-color: black;
     text-decoration: none;
+    box-shadow: 0 0 0 2pt red;
   }
 `;
 const Header = props => {
