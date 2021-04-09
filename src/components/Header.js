@@ -27,7 +27,7 @@ const Header = props => {
     <StyledHeader>
       <h1>
         <Link href="/">
-          <StyledLink href="/">Met Museum Search</StyledLink>
+          <StyledLink href="/">Art Search</StyledLink>
         </Link>
       </h1>
     </StyledHeader>

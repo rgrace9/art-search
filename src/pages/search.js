@@ -2,35 +2,39 @@ import React, {useEffect} from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router'
 import {createQueryString} from 'utils/queryString';
-import {paginate, pageObjectIds} from 'utils/pagination';
+import {paginate} from 'utils/pagination';
 
 const Search = () => {
   const router = useRouter();
 
-  // const searchObjects = async () => {
-  //   // 436576, 196461, 325688
-  //   try {
-  //     const res = await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects?${queryString}`);
-  //     console.log(res)
-  //     console.log(router)
-  //     const {pathname} = router;
-      
-  //   } catch(err) {
-  //     console.log('err', err)
-  //   }
-  // }
+  const getObject = async (objectId) => {
+    try {
+      const {data} = await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId}`);
+      return data;
+    } catch(err) {
+      console.log('err', err)
+    }
+  }
+
+  const pageObjectsData = async (objectIds) => {
+    let objectsData = await Promise.all(
+      objectIds.map(async (id) => {
+        let res = await getObject(id);
+        return res;
+      })
+    )
+    return objectsData;
+  } 
+    
+  
   const searchDatabase = async (queryString) => {
     if (!queryString) return;
     try {
       const {data: {total, objectIDs}} = await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/search?${queryString}`);
-      const paginationData = {
-        totalObjects: total, currentPage: 2
-      }
-      console.log(objectIDs)
-      const totalCount = paginate(paginationData);
-      const objects = pageObjectIds({currentPage: 1, pageSize: 10, objectIds: objectIDs})
-      console.log(objects)
-   
+
+
+      const objects = paginate({currentPage: 1, pageSize: 10, objectIds: objectIDs})
+      console.log(await pageObjectsData(objects))
       
     } catch(err) {
       console.log('err', err)
