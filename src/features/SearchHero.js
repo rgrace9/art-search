@@ -23,7 +23,8 @@ const StyledHeroContent = styled.section`
   margin: auto;
   /* background-color: hsla(0, 25%, 100%, 0.30); */
   /* background-color: hsla(0, 0%, 100%, 0.55); */
-  background-color: rgba(119,116,91, 0.75);
+  /* background-color: rgba(119,116,91, 0.75); */
+  background-color: #fdf8d6;
   padding: 20px 40px;
   width: 75%;
 `
@@ -106,10 +107,10 @@ const SearchHero = () => {
     
     <StyledHero>
         <StyledHeroContent>
-        <StyledForm onSubmit={onSearch}>
+        <StyledForm onSubmit={onSearch} role='search'>
           <StyledLabel htmlFor='search'>Search</StyledLabel>
-            <StyledInput onChange={onInputChange} value={query} id='search' name='search' type="text" placeholder="Search by keyword" />
-            <StyledButton aria-label='Search' type="submit"><Search /></StyledButton>
+            <StyledInput onChange={onInputChange} value={query} id='search' name='search' type="text" placeholder="Search" />
+            <StyledButton aria-label='Submit Search' type="submit"><Search /></StyledButton>
           </StyledForm>
      </StyledHeroContent>
       </StyledHero>

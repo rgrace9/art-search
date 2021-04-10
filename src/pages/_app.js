@@ -8,9 +8,10 @@ html {
   height: 100%;
   width: 100%;
 }
+
 body {
   
-
+  
   /* font-family: 'Lexend', sans-serif; */
   color: ${props => (props.whiteColor ? 'white' : '#130D05')};
   background-color: #72695d;
@@ -27,6 +28,8 @@ body {
 a {
   text-decoration: none;
 }
+
+
 `;
 
 function MyApp({ Component, pageProps }) {

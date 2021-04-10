@@ -25,11 +25,11 @@ const StyledLink = styled.a`
 const Header = props => {
   return (
     <StyledHeader>
-      <h1>
+      
         <Link href="/">
           <StyledLink href="/">Art Search</StyledLink>
         </Link>
-      </h1>
+     
     </StyledHeader>
   );
 };
