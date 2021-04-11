@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import {createQueryString} from 'utils/queryString';
 import {paginate} from 'utils/pagination';
 import SearchResults from 'features/SearchResults';
+import SearchFilters from 'features/SearchFilters';
 
 const DEFAULT_RESULTS_DATA = {
   count: 0,
@@ -76,7 +77,10 @@ const Search = () => {
       <main>
         <Container>
           <h1>Search</h1>
+          <div>
+          <SearchFilters />
           <SearchResults count={results.count} loading={isLoadingPageObjects || isLoadingObjectIds} data={results.pageObjectsData} />
+          </div>
         </Container>
       </main>
     </Layout>
