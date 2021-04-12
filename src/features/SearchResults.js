@@ -43,8 +43,9 @@ const StyledImage = styled.img`
 `
 
 const StyledLink = styled.a`
-    color: ${darkBrown};
-
+  color: ${darkBrown};
+  font-size: 1.6rem;
+  line-height: 1;
   &::after {
     content: '';
     position: absolute;
@@ -73,6 +74,9 @@ const StyledTitle = styled.h2`
 
 const StyledDescriptionContainer = styled.div`
     width: 100%;
+    p {
+      font-size: 1.4rem;
+    }
   @media ${device.laptop} { 
     width: 70%;
 

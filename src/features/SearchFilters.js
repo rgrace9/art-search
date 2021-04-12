@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {color} from 'styles/color';
 import {device} from 'utils/device';
-
+import {amiri} from 'styles/font';
 import {
   Listbox,
   ListboxInput,
@@ -15,6 +15,10 @@ import {
 import "@reach/listbox/styles.css";
 
 const DEPARTMENTS_LIST = [
+  {
+    "departmentId": 'default',
+    "displayName": "All Departments"
+  },
   {
     "departmentId": 1,
     "displayName": "American Decorative Arts"
@@ -95,18 +99,40 @@ const DEPARTMENTS_LIST = [
 
 const StyledForm = styled.form`
   [data-reach-listbox-input] {
-    max-width: 250px;
     background-color: white;
+    width: 100%;
+    @media ${device.tablet} { 
+    width: 400px;
+    } 
+
+    
+
+  }
+  [data-reach-listbox-option] {
+    min-height: 20px;
+  font-family: ${amiri};
+  font-size: 1.2rem !important;
+  }
+
+  .search-filter__option {
+    min-height: 20px;
+  font-family: ${amiri};
+  font-size: 1.2rem;
+  color: purple;
   }
 [data-reach-listbox-input][data-state="idle"] {
   width: 100%;
+
 }
 [data-reach-listbox-input][data-value="VALUE_REF"] {
   width: 100%;
+
 }
 [data-reach-listbox-button] {
   width: 100%;
   min-height: 20px;
+  font-family: ${amiri};
+  font-size: 1.2rem;
 }
 
 [data-reach-listbox-arrow]  {
@@ -114,9 +140,34 @@ const StyledForm = styled.form`
 }
 `
 
+const StyledSearchText = styled.input`
+  width: 100%;
+  line-height: 1.5;
+  font-family: ${amiri};
+  font-size: 1.4rem;
+  padding: 2px;
+  outline: none;
+  padding: 0.6em 1.45em 0.7em;
+  -webkit-transition: .18s ease-out;
+  -moz-transition: .18s ease-out;
+  -o-transition: .18s ease-out;
+  transition: .18s ease-out;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #d1d1d1;
+  box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.07);
+
+  
+  &:focus {
+  color: #4b515d;
+  border: 1px solid #B8B6B6;
+  box-shadow:  0px 0px 8px rgba(0, 0, 0, 0.2);
+}
+`
+
 const SearchFilters = props => {
 
-  const [departmentValue, setDepartmentValue] = React.useState('');
+  const [departmentValue, setDepartmentValue] = React.useState('default');
 
 
   const onDepartmentChange = (val) => {
@@ -127,14 +178,14 @@ const SearchFilters = props => {
       <label htmlFor='text'>Search
 
       </label>
-      <input id='text' name='text'/>
+      <StyledSearchText id='text' name='text'/>
 
       <label htmlFor='department'>Department
 
 </label>
-<Listbox id="department" name='department' value={departmentValue} onChange={onDepartmentChange}>
+<Listbox defaultValue='default' id="department" name='department' value={departmentValue} onChange={onDepartmentChange}>
   {DEPARTMENTS_LIST.map(d => (
-    <ListboxOption key={d.departmentId} value={d.departmentId}>{d.displayName}</ListboxOption>
+    <ListboxOption style={{fontSize: '1.2rem', fontFamily: `${amiri}`}} className='search-filter__option' key={d.departmentId} value={d.departmentId}>{d.displayName}</ListboxOption>
   ))}
 
     </Listbox>

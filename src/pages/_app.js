@@ -15,6 +15,11 @@ body {
   /* font-family: 'Lexend', sans-serif; */
   color: ${props => (props.whiteColor ? 'white' : '#130D05')};
   background-color: #72695d;
+  font-size: 62.5%;
+  
+  label {
+    font-size: 1.4rem;
+  }
 }
 * {
   margin: 0;

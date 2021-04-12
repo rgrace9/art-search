@@ -11,7 +11,7 @@ const StyledHeader = styled.header`
 
 const StyledLink = styled.a`
   color: #fdf8d6;
-  font-size: 1.6rem;
+  font-size: 2.4rem;
   padding: 2px 5px;
   font-family: 'Julius Sans One', sans-serif;
   outline: none;
