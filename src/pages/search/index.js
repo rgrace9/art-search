@@ -8,7 +8,14 @@ import {createQueryString} from 'utils/queryString';
 import {paginate} from 'utils/pagination';
 import SearchResults from 'features/SearchResults';
 import SearchFilters from 'features/SearchFilters';
-
+const INITIAL_FORM_STATE = {
+  query: {
+    value: ''
+  },
+  departmentId: {
+    value: ''
+  }
+}
 const DEFAULT_RESULTS_DATA = {
   count: 0,
   objectIds: [],
