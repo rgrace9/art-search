@@ -97,7 +97,14 @@ const DEPARTMENTS_LIST = [
   }
 ]
 
+const StyledLabel = styled.label`
+    font-family: ${amiri};
+  font-size: 1.2rem !important;
+  color: ${color.cream};
+`
 const StyledForm = styled.form`
+background-color: ${color.maroon};
+padding: 20px;
   [data-reach-listbox-input] {
     background-color: white;
     width: 100%;
@@ -175,14 +182,14 @@ const SearchFilters = props => {
   }
   return (
     <StyledForm role='search'>
-      <label htmlFor='text'>Search
+      <StyledLabel htmlFor='text'>Search
 
-      </label>
+      </StyledLabel>
       <StyledSearchText id='text' name='text'/>
 
-      <label htmlFor='department'>Department
+      <StyledLabel htmlFor='department'>Department
 
-</label>
+</StyledLabel>
 <Listbox defaultValue='default' id="department" name='department' value={departmentValue} onChange={onDepartmentChange}>
   {DEPARTMENTS_LIST.map(d => (
     <ListboxOption style={{fontSize: '1.2rem', fontFamily: `${amiri}`}} className='search-filter__option' key={d.departmentId} value={d.departmentId}>{d.displayName}</ListboxOption>
