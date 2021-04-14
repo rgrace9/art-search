@@ -1,6 +1,8 @@
 # Art Search
 
-This project uses [Next.js](https://nextjs.org/) with the [Metropolitan Museum of Art's API](https://metmuseum.github.io/). The site is styled with [styled-components](https://styled-components.com/).
+## Description
+
+This project uses [Next.js](https://nextjs.org/) with the [Metropolitan Museum of Art's API](https://metmuseum.github.io/). The site is styled with [styled-components](https://styled-components.com/). The global state of the project is managed with [Recoil.js](https://recoiljs.org/).
 
 ## Installation
 
