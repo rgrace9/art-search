@@ -14,6 +14,8 @@ import {
 } from "@reach/listbox";
 import "@reach/listbox/styles.css";
 import {DEPARTMENTS_LIST} from 'constants/departmentsList';
+import {searchTextState, departmentState} from 'states/queryState';
+import {useRecoilState} from 'recoil';
 
 
 const StyledLabel = styled.label`
@@ -99,7 +101,7 @@ const StyledSearchText = styled.input`
 
   
   &:focus {
-  color: #4b515d;
+  
   border: 1px solid #B8B6B6;
   box-shadow:  0px 0px 8px rgba(0, 0, 0, 0.2);
 }
@@ -121,13 +123,18 @@ const StyledButton = styled.button`
 `
 
 const SearchFilters = props => {
-
-  const [departmentValue, setDepartmentValue] = React.useState('default');
-
+  const [query, setQuery] = useRecoilState(searchTextState);
+  const [departmentId, setDepartmentId] = useRecoilState(departmentState)
 
   const onDepartmentChange = (val) => {
-    setDepartmentValue(val)
+    setDepartmentId(val)
   }
+
+  const onInputChange = (e) => {
+    setQuery(e.target.value)
+  }
+
+
   return (
     <StyledContainer>
       <h2>Search Filters</h2>
@@ -135,12 +142,12 @@ const SearchFilters = props => {
         <StyledLabel htmlFor='text'>Query
 
         </StyledLabel>
-        <StyledSearchText placeholder='e.g. Caravaggio, dresses, jewelry, roses' id='text' name='q'/>
+        <StyledSearchText onChange={onInputChange} value={query} placeholder='e.g. Caravaggio, dresses, jewelry, roses' id='text' name='q'/>
 
         <StyledLabel htmlFor='departmentId'>Department
 
   </StyledLabel>
-  <Listbox defaultValue='default' id="departmentId" name='departmentId' value={departmentValue} onChange={onDepartmentChange}>
+  <Listbox value={departmentId} id="departmentId" name='departmentId' onChange={onDepartmentChange}>
     {DEPARTMENTS_LIST.map(d => (
       <ListboxOption style={{fontSize: '1.2rem', fontFamily: `${amiri}`}} className='search-filter__option' key={d.departmentId} value={d.departmentId}>{d.displayName}</ListboxOption>
     ))}

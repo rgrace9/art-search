@@ -8,14 +8,9 @@ import {createQueryString} from 'utils/queryString';
 import {paginate} from 'utils/pagination';
 import SearchResults from 'features/SearchResults';
 import SearchFilters from 'features/SearchFilters';
-const INITIAL_FORM_STATE = {
-  query: {
-    value: ''
-  },
-  departmentId: {
-    value: ''
-  }
-}
+import {searchTextState, departmentState} from 'states/queryState';
+import {useRecoilState} from 'recoil';
+
 const DEFAULT_RESULTS_DATA = {
   count: 0,
   objectIds: [],
@@ -27,6 +22,9 @@ const Search = () => {
   const [results, setResults] = useState(DEFAULT_RESULTS_DATA)
   const [isLoadingObjectIds, setIsLoadingObjectIds] = useState(false);
   const [isLoadingPageObjects, setIsLoadingPageObjects] = useState(false);
+  const [query, setQuery] = useRecoilState(searchTextState);
+  const [departmentId, setDepartmentId] = useRecoilState(departmentState)
+
 
   const getObject = async (objectId) => {
     try {
@@ -55,9 +53,9 @@ const Search = () => {
     setIsLoadingObjectIds(true)
     try {
       const {data: {total, objectIDs}} = await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/search?${queryString}`);
-
+     
       setIsLoadingObjectIds(false)
-      const objects = paginate({currentPage: 1, pageSize: 10, objectIds: objectIDs})
+      const objects = paginate({currentPage: 1, pageSize: 10, objectIds: objectIDs || []})
       const res = await pageObjectsData(objects);
       setResults((prevState) => ({
         ...prevState,
@@ -74,8 +72,17 @@ const Search = () => {
 
   useEffect(() => {
     if (router.query) {
+      const searchObj = {...router.query};
+      if (searchObj['q']) {
+        setQuery(searchObj['q'])
+      }
+      if (searchObj['departmentId']) {
+        setDepartmentId(searchObj['departmentId'])
+      }
       const val = createQueryString(router.query);
-      searchDatabase(val)
+      if (val) {
+        searchDatabase(val)
+      }
     }
   }, [router.query])
 

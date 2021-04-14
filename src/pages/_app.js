@@ -1,6 +1,6 @@
 import { createGlobalStyle, ServerStyleSheet } from 'styled-components';
 import {color} from 'styles/color';
-
+import {RecoilRoot} from 'recoil';
 
 
 export const GlobalStyle = createGlobalStyle`
@@ -40,10 +40,10 @@ a {
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
-    <GlobalStyle />
-    <Component {...pageProps} />
-    </>
+    <RecoilRoot>
+      <GlobalStyle />
+      <Component {...pageProps} />
+    </RecoilRoot>
   );
 }
 

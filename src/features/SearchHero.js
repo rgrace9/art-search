@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Search} from 'components/Icons'
 import { useRouter } from 'next/router'
-
+import {searchTextState} from 'states/queryState';
+import {useRecoilState} from 'recoil';
 
 const StyledHero = styled.div`
   background-image: url('/images/denial-of-saint-peter.jpeg');
@@ -86,7 +87,7 @@ const StyledButton = styled.button`
 
 `
 const SearchHero = () => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useRecoilState(searchTextState);
   const router = useRouter()
 
   const onSearch = (e) => {
