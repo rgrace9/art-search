@@ -73,10 +73,10 @@ const Search = () => {
   useEffect(() => {
     if (router.query) {
       const searchObj = {...router.query};
-      if (searchObj['q']) {
+      if (searchObj['q'] && query !== searchObj['q']) {
         setQuery(searchObj['q'])
       }
-      if (searchObj['departmentId']) {
+      if (searchObj['departmentId'] && departmentId !== searchObj['departmentId']) {
         setDepartmentId(searchObj['departmentId'])
       }
       const val = createQueryString(router.query);
