@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Layout from 'components/Layout';
 import Container from 'components/Container';
-
+import {GlobalStyle} from 'pages/_app';
 import axios from 'axios';
 import { useRouter } from 'next/router'
 import {createQueryString} from 'utils/queryString';
@@ -81,9 +81,10 @@ const Search = () => {
 
   return (
     <Layout pageTitle='Search'>
+      <GlobalStyle lightBackgroundColor />
       <main>
         <Container>
-          <h1>Search</h1>
+         
           <div>
           <SearchFilters />
           <SearchResults count={results.count} loading={isLoadingPageObjects || isLoadingObjectIds} data={results.pageObjectsData} />

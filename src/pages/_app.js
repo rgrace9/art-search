@@ -1,4 +1,5 @@
 import { createGlobalStyle, ServerStyleSheet } from 'styled-components';
+import {color} from 'styles/color';
 
 
 
@@ -13,8 +14,8 @@ body {
   
   
   /* font-family: 'Lexend', sans-serif; */
-  color: ${props => (props.whiteColor ? 'white' : '#130D05')};
-  background-color: #72695d;
+  color: ${props => (props.whiteColor ? `${color.lightCream}` : '#130D05')};
+  background-color: ${props => (props.lightBackgroundColor ? `${color.lightCream}` : '#72695d')};
   font-size: 62.5%;
   
   label {

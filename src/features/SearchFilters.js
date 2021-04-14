@@ -13,101 +13,32 @@ import {
   ListboxOption,
 } from "@reach/listbox";
 import "@reach/listbox/styles.css";
+import {DEPARTMENTS_LIST} from 'constants/departmentsList';
 
-const DEPARTMENTS_LIST = [
-  {
-    "departmentId": 'default',
-    "displayName": "All Departments"
-  },
-  {
-    "departmentId": 1,
-    "displayName": "American Decorative Arts"
-  },
-  {
-    "departmentId": 3,
-    "displayName": "Ancient Near Eastern Art"
-  },
-  {
-    "departmentId": 4,
-    "displayName": "Arms and Armor"
-  },
-  {
-    "departmentId": 5,
-    "displayName": "Arts of Africa, Oceania, and the Americas"
-  },
-  {
-    "departmentId": 6,
-    "displayName": "Asian Art"
-  },
-  {
-    "departmentId": 7,
-    "displayName": "The Cloisters"
-  },
-  {
-    "departmentId": 8,
-    "displayName": "The Costume Institute"
-  },
-  {
-    "departmentId": 9,
-    "displayName": "Drawings and Prints"
-  },
-  {
-    "departmentId": 10,
-    "displayName": "Egyptian Art"
-  },
-  {
-    "departmentId": 11,
-    "displayName": "European Paintings"
-  },
-  {
-    "departmentId": 12,
-    "displayName": "European Sculpture and Decorative Arts"
-  },
-  {
-    "departmentId": 13,
-    "displayName": "Greek and Roman Art"
-  },
-  {
-    "departmentId": 14,
-    "displayName": "Islamic Art"
-  },
-  {
-    "departmentId": 15,
-    "displayName": "The Robert Lehman Collection"
-  },
-  {
-    "departmentId": 16,
-    "displayName": "The Libraries"
-  },
-  {
-    "departmentId": 17,
-    "displayName": "Medieval Art"
-  },
-  {
-    "departmentId": 18,
-    "displayName": "Musical Instruments"
-  },
-  {
-    "departmentId": 19,
-    "displayName": "Photographs"
-  },
-  {
-    "departmentId": 21,
-    "displayName": "Modern Art"
-  }
-]
 
 const StyledLabel = styled.label`
     font-family: ${amiri};
   font-size: 1.2rem !important;
-  color: ${color.cream};
+  color: ${color.lightCream};
+  padding-top: 20px;
+`
+
+const StyledContainer = styled.section`
+  background-color: ${color.maroon};
+padding: 20px;
+h2 {
+  font-family: ${amiri};
+  color: ${color.lightCream};
+  font-size: 1.8rem;
+  font-weight: 400;
+}
 `
 const StyledForm = styled.form`
-background-color: ${color.maroon};
-padding: 20px;
+
   [data-reach-listbox-input] {
     background-color: white;
     width: 100%;
+    border-radius: 4px;
     @media ${device.tablet} { 
     width: 400px;
     } 
@@ -119,6 +50,7 @@ padding: 20px;
     min-height: 20px;
   font-family: ${amiri};
   font-size: 1.2rem !important;
+  
   }
 
   .search-filter__option {
@@ -129,17 +61,19 @@ padding: 20px;
   }
 [data-reach-listbox-input][data-state="idle"] {
   width: 100%;
+  /* border-radius: 4px; */
 
 }
 [data-reach-listbox-input][data-value="VALUE_REF"] {
   width: 100%;
-
+  border-radius: 4px;
 }
 [data-reach-listbox-button] {
   width: 100%;
   min-height: 20px;
   font-family: ${amiri};
   font-size: 1.2rem;
+  border-radius: 4px;
 }
 
 [data-reach-listbox-arrow]  {
@@ -152,9 +86,8 @@ const StyledSearchText = styled.input`
   line-height: 1.5;
   font-family: ${amiri};
   font-size: 1.4rem;
-  padding: 2px;
-  outline: none;
-  padding: 0.6em 1.45em 0.7em;
+  margin-bottom: 20px;
+  padding: 0.5em 1.0em;
   -webkit-transition: .18s ease-out;
   -moz-transition: .18s ease-out;
   -o-transition: .18s ease-out;
@@ -172,6 +105,21 @@ const StyledSearchText = styled.input`
 }
 `
 
+const StyledButton = styled.button`
+  /* background: none; */
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	/* outline: inherit; */
+  padding: 10px 48px;
+  border-radius: 4px;
+  font-family: ${amiri};
+  font-size: 1.4rem;
+  margin-top: 20px;
+`
+
 const SearchFilters = props => {
 
   const [departmentValue, setDepartmentValue] = React.useState('default');
@@ -181,23 +129,27 @@ const SearchFilters = props => {
     setDepartmentValue(val)
   }
   return (
-    <StyledForm role='search'>
-      <StyledLabel htmlFor='text'>Search
+    <StyledContainer>
+      <h2>Search Filters</h2>
+      <StyledForm role='search'>
+        <StyledLabel htmlFor='text'>Query
 
-      </StyledLabel>
-      <StyledSearchText id='text' name='text'/>
+        </StyledLabel>
+        <StyledSearchText placeholder='e.g. Caravaggio, dresses, jewelry, roses' id='text' name='q'/>
 
-      <StyledLabel htmlFor='department'>Department
+        <StyledLabel htmlFor='departmentId'>Department
 
-</StyledLabel>
-<Listbox defaultValue='default' id="department" name='department' value={departmentValue} onChange={onDepartmentChange}>
-  {DEPARTMENTS_LIST.map(d => (
-    <ListboxOption style={{fontSize: '1.2rem', fontFamily: `${amiri}`}} className='search-filter__option' key={d.departmentId} value={d.departmentId}>{d.displayName}</ListboxOption>
-  ))}
+  </StyledLabel>
+  <Listbox defaultValue='default' id="departmentId" name='departmentId' value={departmentValue} onChange={onDepartmentChange}>
+    {DEPARTMENTS_LIST.map(d => (
+      <ListboxOption style={{fontSize: '1.2rem', fontFamily: `${amiri}`}} className='search-filter__option' key={d.departmentId} value={d.departmentId}>{d.displayName}</ListboxOption>
+    ))}
 
-    </Listbox>
-    
-    </StyledForm>
+      </Listbox>
+      <StyledButton type='submit'>Search</StyledButton>
+      </StyledForm>
+
+    </StyledContainer>
   );
 };
 

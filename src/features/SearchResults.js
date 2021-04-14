@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import {color} from 'styles/color';
 import {device} from 'utils/device';
+import {amiri} from 'styles/font';
 
 const {
   cream, darkBrown
@@ -13,26 +14,35 @@ const StyledList = styled.ul`
   font-family: 'Amiri', serif;
 
 `
+const StyledCount = styled.div`
+padding: 16px 0px;
+text-align: center;
+  h2 {
+  font-family: ${amiri};
+  color: ${color.darkBrown};
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+`
+
 const StyledItem = styled.li`
   display: flex;
   align-items: row;
   flex-wrap: wrap;
-  background-color: #926E43;
+  background-color: ${color.cream};
   padding: 20px 20px;
   margin-bottom: 20px;
   color: ${darkBrown};
   /* box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);  */
   line-height: 1.5rem;
   position: relative;
-  border: 4px solid transparent;
-  border-radius: 8px;
-  &:hover {
-    /* box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);  */
-    border: 4px solid ${cream};
-  }
+  border: 6px solid transparent;
+  border-radius: 2px;
+  box-shadow: 1px 1px 10px 1px #1F0A03;
+ 
   &:focus-within {
     /* box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.5);  */
-    border: 4px solid ${cream};
+    border: 6px solid ${darkBrown};
 
   }
 `
@@ -94,9 +104,9 @@ const SearchResults = props => {
   }
   return (
     <section aria-live="polite" aria-busy="false">
-      <div role='status'>
-        <p>{count || 'No'} Search {`Result${count !== 1 ? 's' : ''}`}</p>
-      </div>
+      <StyledCount role='status'>
+        <h2>{count || 'No'} Search {`Result${count !== 1 ? 's' : ''}`}</h2>
+      </StyledCount>
       <StyledList role='list'>
         {data.map(d => (
           <StyledItem key={d.objectID}>

@@ -4,5 +4,6 @@ export const color = {
   taupe: '#72695d',
   goldenBrown: '#926E43',
   cream: '#fdf8d6',
-  maroon: '#1F0A03'
+  maroon: '#1F0A03',
+  lightCream: '#f2f0e4',
 }
