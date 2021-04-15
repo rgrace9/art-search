@@ -75,9 +75,14 @@ const Search = () => {
       const searchObj = {...router.query};
       if (searchObj['q'] && query !== searchObj['q']) {
         setQuery(searchObj['q'])
+      } else if (!searchObj['q']) {
+        setQuery('')
       }
       if (searchObj['departmentId'] && departmentId !== searchObj['departmentId']) {
+        console.log('here')
         setDepartmentId(searchObj['departmentId'])
+      } else if (!searchObj['departmentId']) {
+        setDepartmentId('default')
       }
       const val = createQueryString(router.query);
       if (val) {
