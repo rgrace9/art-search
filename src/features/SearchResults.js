@@ -5,13 +5,14 @@ import Link from 'next/link';
 import {color} from 'styles/color';
 import {device} from 'utils/device';
 import {amiri} from 'styles/font';
+import Loading from 'components/Loading';
 
 const {
   cream, darkBrown
 } = color;
 const StyledList = styled.ul`
   list-style-type: none;
-  font-family: 'Amiri', serif;
+  font-family: ${amiri};
 
 `
 const StyledCount = styled.div`
@@ -98,7 +99,7 @@ const SearchResults = props => {
   if (loading) {
     return (
       <section aria-live="polite" aria-busy="true">
-        <p>LOADING...</p> 
+        <Loading /> 
       </section>
     )
   }

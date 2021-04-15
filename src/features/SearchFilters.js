@@ -108,18 +108,17 @@ const StyledSearchText = styled.input`
 `
 
 const StyledButton = styled.button`
-  /* background: none; */
 	color: inherit;
 	border: none;
 	padding: 0;
 	font: inherit;
 	cursor: pointer;
-	/* outline: inherit; */
-  padding: 10px 48px;
   border-radius: 4px;
   font-family: ${amiri};
   font-size: 1.4rem;
   margin-top: 20px;
+  padding: 2px 48px;
+  background: white;
 `
 
 const SearchFilters = props => {
