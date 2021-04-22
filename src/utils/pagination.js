@@ -5,6 +5,10 @@ const getStartIndex = (currentPage, pageSize) => {
   return startIndex;
 }
 
+const totalNumberOfPages = (count = 0, pageSize = 10) => {
+  const totalPages = Math.ceil(count / pageSize)
+  return totalPages
+}
 
 const paginate = (pagination) => {
   const {
@@ -21,4 +25,5 @@ const paginate = (pagination) => {
 
 export {
   paginate,
+  totalNumberOfPages
 }

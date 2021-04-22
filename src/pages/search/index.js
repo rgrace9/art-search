@@ -5,7 +5,7 @@ import {GlobalStyle} from 'pages/_app';
 import axios from 'axios';
 import { useRouter } from 'next/router'
 import {createQueryString} from 'utils/queryString';
-import {paginate} from 'utils/pagination';
+import {paginate, totalNumberOfPages} from 'utils/pagination';
 import SearchResults from 'features/SearchResults';
 import SearchFilters from 'features/SearchFilters';
 import {searchTextState, departmentState} from 'states/queryState';
@@ -56,6 +56,8 @@ const Search = () => {
      
       setIsLoadingObjectIds(false)
       const objects = paginate({currentPage: 1, pageSize: 10, objectIds: objectIDs || []})
+      const totalPages = totalNumberOfPages(total, 10);
+      console.log(totalPages)
       const res = await pageObjectsData(objects);
       setResults((prevState) => ({
         ...prevState,
@@ -79,7 +81,7 @@ const Search = () => {
         setQuery('')
       }
       if (searchObj['departmentId'] && departmentId !== searchObj['departmentId']) {
-        console.log('here')
+        
         setDepartmentId(searchObj['departmentId'])
       } else if (!searchObj['departmentId']) {
         setDepartmentId('default')
