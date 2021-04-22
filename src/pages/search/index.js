@@ -17,6 +17,16 @@ const DEFAULT_RESULTS_DATA = {
   pageObjectsData: [],
   error: false
 }
+
+export const getObject = async (objectId) => {
+  try {
+    const {data} = await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId}`);
+    return data;
+  } catch(err) {
+    console.log('err', err)
+  }
+}
+
 const Search = () => {
   const router = useRouter();
   const [results, setResults] = useState(DEFAULT_RESULTS_DATA)
@@ -26,14 +36,7 @@ const Search = () => {
   const [departmentId, setDepartmentId] = useRecoilState(departmentState)
 
 
-  const getObject = async (objectId) => {
-    try {
-      const {data} = await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId}`);
-      return data;
-    } catch(err) {
-      console.log('err', err)
-    }
-  }
+
 
   const pageObjectsData = async (objectIds) => {
     setIsLoadingPageObjects(true)

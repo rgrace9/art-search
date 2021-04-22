@@ -1,0 +1,1 @@
+import {selectedObjectState} from './selectedObject';

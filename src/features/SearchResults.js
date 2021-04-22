@@ -6,6 +6,8 @@ import {color} from 'styles/color';
 import {device} from 'utils/device';
 import {amiri} from 'styles/font';
 import Loading from 'components/Loading';
+import {selectedObjectState} from 'states/selectedObject';
+import {useRecoilState} from 'recoil';
 
 const {
   cream, darkBrown
@@ -95,6 +97,9 @@ const StyledDescriptionContainer = styled.div`
 `
 
 const SearchResults = props => {
+  
+  const [selectedItem, setSelectedItem] = useRecoilState(selectedObjectState);
+
   const {data, loading, count} = props; 
   if (loading) {
     return (
@@ -103,6 +108,7 @@ const SearchResults = props => {
       </section>
     )
   }
+
   return (
     <section aria-live="polite" aria-busy="false">
       <StyledCount role='status'>
@@ -116,7 +122,9 @@ const SearchResults = props => {
             </StyledImageContainer>
             <StyledDescriptionContainer>
             <StyledTitle>
-              <Link href={`/search/${d.objectID}`}>
+              <Link
+                href={`/search/${d.objectID}`}
+              >
                 <StyledLink href={`/search/${d.objectID}`}>
                 {d.title}
                 </StyledLink>
