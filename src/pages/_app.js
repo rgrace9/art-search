@@ -1,6 +1,7 @@
 import { createGlobalStyle, ServerStyleSheet } from 'styled-components';
 import {color} from 'styles/color';
 import {RecoilRoot} from 'recoil';
+import {amiri} from 'styles/font';
 
 
 export const GlobalStyle = createGlobalStyle`
@@ -17,7 +18,7 @@ body {
   color: ${props => (props.whiteColor ? `${color.lightCream}` : '#130D05')};
   background-color: ${props => (props.lightBackgroundColor ? `${color.lightCream}` : '#72695d')};
   font-size: 62.5%;
-  
+  font-family: ${props => (props.fontFamily ? `${props.fontFamily}` : `${amiri}`)};
   label {
     font-size: 1.4rem;
   }
