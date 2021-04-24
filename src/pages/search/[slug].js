@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {getObject} from './index';
 import Layout from 'components/Layout';
@@ -9,7 +9,7 @@ import {color} from 'styles/color';
 import {amiri} from 'styles/font';
 import {INITIAL_OBJECT_STATE} from 'constants/defaultObjectValue';
 import styled from 'styled-components';
-
+import {  FlipCard, FlipCardsContainer } from 'components/FlipCards';
 
 const StyledWikiResultsContainer = styled.ul`
     padding-left: 20px;
@@ -26,6 +26,7 @@ const StyledSubHeading = styled.h2`
 `
 const SearchResult = props => {
   const {data} = props;
+  const [wikiResults, setWikiResults] = useState([]);
 
   // console.log(data)
   async function searchWikipedia(searchQuery) {
@@ -48,7 +49,8 @@ const SearchResult = props => {
   const getValue = async (queryString) => {
         
     const res = await Promise.resolve(searchWikipedia(queryString));
-    displayWikiResults(res)
+    // displayWikiResults(res)
+    setWikiResults(res)
   }
 
   useEffect(() => {
@@ -68,23 +70,21 @@ const SearchResult = props => {
     results.forEach(result => {
       const url = `https://en.wikipedia.org/?curid=${result.pageid}`;
 
-      const searchResults = document.querySelector('.js-search-results');
+      // const searchResults = document.querySelector('.js-search-results');
 
       // Append the search result to the DOM
-      searchResults.insertAdjacentHTML(
-        'beforeend',
-        `<li class="result-item">
-          <h3 class="result-title">
-            <a href="${url}" target="_blank" rel="noopener">${result.title}</a>
-          </h3>
-          <span class="result-snippet">${result.snippet}...</span><br>
-        </li>`
-      );
+      // searchResults.insertAdjacentHTML(
+      //   'beforeend',
+      //   `<li class="result-item">
+      //     <h3 class="result-title">
+      //       <a href="${url}" target="_blank" rel="noopener">${result.title}</a>
+      //     </h3>
+      //     <span class="result-snippet">${result.snippet}...</span><br>
+      //   </li>`
+      // );
     })
 
   }
-
-
 
   return (
     <Layout pageTitle={data.title}>
@@ -95,11 +95,15 @@ const SearchResult = props => {
               </Container>
               <Container>
                 <h2>Related Wikipedia Resources</h2>
-                <StyledWikiResultsContainer>
+                {/* <StyledWikiResultsContainer>
                 <div className='js-search-results' />
 
-                </StyledWikiResultsContainer>
-                  
+                </StyledWikiResultsContainer> */}
+                <FlipCardsContainer>
+                  {wikiResults.map(res => (
+                    <FlipCard key={res.pageid} data={res} />
+                  ))}
+                </FlipCardsContainer>
               </Container>
             </main>
     </Layout>
