@@ -42,7 +42,6 @@ a {
 function MyApp({ Component, pageProps }) {
   return (
     <RecoilRoot>
-      <GlobalStyle />
       <Component {...pageProps} />
     </RecoilRoot>
   );

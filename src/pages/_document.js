@@ -36,8 +36,9 @@ export default class MyDocument extends Document {
         <Head>
           <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Parisienne&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-          {/* Step 5: Output the styles in the head  */}
           {this.props.styleTags}
         </Head>
         <body>

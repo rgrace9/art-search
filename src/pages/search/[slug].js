@@ -55,8 +55,12 @@ const SearchResult = props => {
 
   useEffect(() => {
     if (data.objectID) {
-      const searchValue = data.artistAlphaSort ? data.artistAlphaSort : data.country
-      getValue(searchValue)
+      // console.log(data)
+      const searchValue = data.artistAlphaSort ? data.artistAlphaSort : `${data.title} ${data.department}`;
+      // const searchValue = `${data.artistAlphaSort}  ${data.title} ${data.department}`;
+      if (searchValue) {
+        getValue(searchValue)
+      }
     
     }
 
