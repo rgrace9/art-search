@@ -12,7 +12,6 @@ const StyledCardContainer = styled.div`
   margin-right: 20px;
   border-radius: 16px;
   box-shadow: 0 5px 18px rgba(0, 0, 0, 0.6);
-  cursor: pointer;
   text-align: center;
   -webkit-transition: transform 0.6s;
   transform-style: preserve-3d;
@@ -27,24 +26,53 @@ transition: transform 0.6s;
   width: 20%;
 
 }
-
+.card--front,
+.card--back {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+}
 
 
 
 `
 
 const StyledFront = styled.div`
-    -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+    height: 100%;
   transform: rotateX(0deg);
   -webkit-transform: rotateX(0deg);
 
+
 `
 const StyledBack = styled.div`
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  position: absolute;
+  text-align: center;
+  right: 0;
+  left: 0;
+  top: 10px;
+  color: #20263f;
+`
 
+const StyledCardContent = styled.div`
+  min-height: 190px;
+  /* position: relative; */
+
+`
+const StyledFlipButton = styled.button`
+  transform: rotateY(360deg);
+  position:absolute;
+  bottom:0;
+  right:0;
+
+`
+
+const StyledFrontButton = styled.button`
+  position:absolute;
+  bottom:0;
+  right:0;
 `
 const FlipCard = props => {
   const {data} = props;
@@ -60,15 +88,19 @@ const FlipCard = props => {
 
   return (
     <StyledCardContainer ref={cardElement}>
-      <div>
-        <StyledFront>
+        <StyledFront className='card--front'>
+      <StyledCardContent>
         <h3 className="result-title">
           <a href={url} target="_blank" rel="noopener">{data.title}</a>
         </h3>
-          <button onClick={handleFlip}>Flip</button>
+          <StyledFrontButton onClick={handleFlip}>Flip</StyledFrontButton>
+      </StyledCardContent>
         </StyledFront>
-
-      </div>
+        <StyledBack className='card--back'>
+        <StyledCardContent>
+        <StyledFlipButton onClick={handleFlip}>Flip</StyledFlipButton> 
+        </StyledCardContent>
+        </StyledBack>
     </StyledCardContainer>
   );
 };

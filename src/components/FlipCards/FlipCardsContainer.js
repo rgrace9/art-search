@@ -27,6 +27,8 @@ const StyledContainer = styled.div`
 
   .flip {
     background-color: pink;
+    transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
   }
 `
 const FlipCardsContainer = props => {
