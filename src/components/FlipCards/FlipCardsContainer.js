@@ -3,26 +3,29 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {device} from 'utils/device';
 import Container from '../Container'
-const StyledContainer = styled.div`
+const StyledContainer = styled.ul`
   display: flex;
   flex-direction: column;
   position: relative;
   perspective: 1000px;
-  justify-content: center;
+  /* justify-content: center; */
   align-content: center;
   align-items: center;
+  width: 100%;
   @media ${device.tablet} {
     flex-wrap: wrap;
     display: flex;
-    margin-left: -10px;
-    margin-right: -10px;
+
     flex-direction: row;
-    justify-content: space-around;
+    
     align-content: center;
     position: relative;
-    perspective: 1000px;
+    perspective: 2000px;
     align-items: stretch;
-  
+    margin: 0;
+  padding: 0;
+  /* margin-left: -10px;
+    margin-right: -10px; */
   }
 
   .flip {
@@ -35,7 +38,7 @@ const FlipCardsContainer = props => {
   const {children} = props;
   return (
    
-      <StyledContainer>
+      <StyledContainer role='list'>
         {children}
       </StyledContainer>
   

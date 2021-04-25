@@ -60,7 +60,6 @@ const Search = () => {
       setIsLoadingObjectIds(false)
       const objects = paginate({currentPage: 1, pageSize: 10, objectIds: objectIDs || []})
       const totalPages = totalNumberOfPages(total, 10);
-      console.log(totalPages)
       const res = await pageObjectsData(objects);
       setResults((prevState) => ({
         ...prevState,

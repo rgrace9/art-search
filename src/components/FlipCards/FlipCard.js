@@ -6,7 +6,7 @@ import {color} from 'styles/color';
 import {RightArrow} from '../Icons';
 import {josefinSans} from 'styles/font';
 
-const StyledCardContainer = styled.div`
+const StyledCardContainer = styled.li`
     background: ${color.eunry};
   display: flex;
   flex-direction: column;
@@ -22,15 +22,25 @@ const StyledCardContainer = styled.div`
   position: relative;
 transition: transform 0.6s;
   -webkit-transition: transform 0.6s;
-  min-height: 200px;
+  min-height: 300px;
   width: 100%;
   max-width: 300px;
   border: 2px solid ${color.navyBlue};
+  padding: 1rem;
   @media ${device.tablet} {
   
-  width: 25%;
-
+  /* width: 25%; */
+  /* max-width: 300px; */
+width: 33.3333%;
 }
+
+
+  /* @media(min-width: 40rem) {
+    width: 20%;
+  }
+  @media(min-width: 56rem) {
+    width: 33.3333%;
+  } */
 .card--front,
 .card--back {
   -webkit-backface-visibility: hidden;
@@ -61,10 +71,11 @@ const StyledBack = styled.div`
   left: 0;
   top: 10px;
   color: #20263f;
+  visibility: hidden;
 `
 
 const StyledCardContent = styled.div`
-  min-height: 190px;
+  min-height: 290px;
   align-items: center;
   display: flex;
   /* position: relative; */
@@ -107,11 +118,22 @@ const StyledLink = styled.a`
 `
 const FlipCard = props => {
   const {data} = props;
-  const cardElement = useRef(null)
+  const cardElement = useRef(null);
+  const cardBackElement = useRef(null);
   const url = `https://en.wikipedia.org/?curid=${data.pageid}`;
 
-  const handleFlip = () => {
+  const handleBackFlip = () => {
     cardElement.current.classList.toggle("flip")
+    if (cardBackElement) {
+      cardBackElement.current.style.visibility = 'hidden'; 
+    }
+  }
+
+  const handleFrontFlip = () => {
+    cardElement.current.classList.toggle("flip")
+    if (cardBackElement) {
+      cardBackElement.current.style.visibility = 'visible'; 
+    }
   }
   
 
@@ -122,14 +144,14 @@ const FlipCard = props => {
         <h3 className="result-title">
           <StyledLink href={url} target="_blank" rel="noopener">{data.title}</StyledLink>
         </h3>
-          <StyledFlipButton aria-label='Flip Card' onClick={handleFlip}><RightArrow /></StyledFlipButton>
+          <StyledFlipButton aria-label='Flip Card' onClick={handleFrontFlip}><RightArrow /></StyledFlipButton>
       </StyledCardContent>
         </StyledFront>
-        <StyledBack className='card--back'>
+        <StyledBack ref={cardBackElement} className='card--back'>
         <StyledCardContent>
           <StyledCardBackWrapper>
        
-        <StyledFlipButtonBack aria-label='Flip Card' onClick={handleFlip}>
+        <StyledFlipButtonBack ref={cardBackElement} aria-label='Flip Card' onClick={handleBackFlip}>
           <RightArrow />
           </StyledFlipButtonBack> 
 

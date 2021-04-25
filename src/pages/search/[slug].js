@@ -21,8 +21,22 @@ const StyledWikiResultsContainer = styled.ul`
     margin-bottom: 20px;
   }
 `
-const StyledSubHeading = styled.h2`
+
+const StyledHeading = styled.h1`
   font-size: 1.6rem;
+`
+
+const StyledSubHeading = styled.h2`
+  font-size: 1.4rem;
+  font-style: italic;
+`
+
+const StyledText = styled.p`
+  font-size: 1.4rem;
+`
+
+const StyledHeading4 = styled.h4`
+
 `
 const SearchResult = props => {
   const {data} = props;
@@ -32,8 +46,9 @@ const SearchResult = props => {
   async function searchWikipedia(searchQuery) {
     const endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${searchQuery}`;
     try {
-      const {data} = await axios.get(endpoint)
-
+      const {data} = await axios.get(endpoint);
+      console.log(data)
+      // return []
       
      return data.query.search
   
@@ -55,7 +70,7 @@ const SearchResult = props => {
 
   useEffect(() => {
     if (data.objectID) {
-      // console.log(data)
+      console.log(data)
       const searchValue = data.artistAlphaSort ? data.artistAlphaSort : `${data.title} ${data.department}`;
       // const searchValue = `${data.artistAlphaSort}  ${data.title} ${data.department}`;
       if (searchValue) {
@@ -95,19 +110,27 @@ const SearchResult = props => {
             <GlobalStyle lightBackgroundColor />
             <main>
               <Container>
-                <StyledSubHeading>{data.title}</StyledSubHeading>
+                <StyledHeading>{data.title}</StyledHeading>
+                <div>
+                  <StyledSubHeading>Details</StyledSubHeading>
+                {data.artistDisplayName && <StyledText>Artist: {data.artistDisplayName}</StyledText> }
+            
+            <StyledText>Date: {data.objectDate}</StyledText>
+            <StyledText>Department: {data.department}</StyledText>
+                </div>
               </Container>
               <Container>
-                <h2>Related Wikipedia Resources</h2>
-                {/* <StyledWikiResultsContainer>
-                <div className='js-search-results' />
+                <StyledSubHeading>Related Wikipedia Resources</StyledSubHeading>
+                {wikiResults.length ? (
+                                  <FlipCardsContainer>
+                                  {wikiResults.map(res => (
+                                    <FlipCard key={res.pageid} data={res} />
+                                  ))}
+                                </FlipCardsContainer>
+                ) : (
+                  <StyledText>No Related Were Articles Found.</StyledText>
+                )}
 
-                </StyledWikiResultsContainer> */}
-                <FlipCardsContainer>
-                  {wikiResults.map(res => (
-                    <FlipCard key={res.pageid} data={res} />
-                  ))}
-                </FlipCardsContainer>
               </Container>
             </main>
     </Layout>

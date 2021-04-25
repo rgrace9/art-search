@@ -14,21 +14,22 @@ const StyledLink = styled.a`
   font-size: 2.4rem;
   padding: 2px 5px;
   font-family: 'Julius Sans One', sans-serif;
-  outline: none;
-  &:focus,
+  /* outline: none; */
+  /* &:focus,
   &:hover {
     background-color: black;
     text-decoration: none;
-    box-shadow: 0 0 0 2pt #46a340;
-  }
+    /* box-shadow: 0 0 0 2pt #46a340; */
+  } */
 `;
 const Header = props => {
   return (
     <StyledHeader>
-      
+      <h1>
         <Link href="/">
           <StyledLink href="/">Art Search</StyledLink>
         </Link>
+      </h1>
      
     </StyledHeader>
   );

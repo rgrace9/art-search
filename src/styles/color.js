@@ -7,5 +7,5 @@ export const color = {
   maroon: '#1F0A03',
   lightCream: '#f2f0e4',
   navyBlue: '#0B202E',
-  eunry: '#D3A495'
+  eunry: '#e8d5cf'
 }
