@@ -10,6 +10,8 @@ import {amiri} from 'styles/font';
 import {INITIAL_OBJECT_STATE} from 'constants/defaultObjectValue';
 import styled from 'styled-components';
 import {  FlipCard, FlipCardsContainer } from 'components/FlipCards';
+import Head from 'next/head';
+import {truncateString} from 'utils/truncateString';
 
 const StyledWikiResultsContainer = styled.ul`
     padding-left: 20px;
@@ -35,21 +37,21 @@ const StyledText = styled.p`
   font-size: 1.4rem;
 `
 
-const StyledHeading4 = styled.h4`
-
+const StyledLink = styled.a`
+  text-decoration: underline;
+  color: ${color.darkBrown};
+  
 `
 const SearchResult = props => {
   const {data} = props;
   const [wikiResults, setWikiResults] = useState([]);
+  const [numberTimesFetched, setNumberTimesFetched] = useState(0);
 
-  // console.log(data)
   async function searchWikipedia(searchQuery) {
     const endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${searchQuery}`;
     try {
       const {data} = await axios.get(endpoint);
-      console.log(data)
-      // return []
-      
+        
      return data.query.search
   
       
@@ -62,18 +64,22 @@ const SearchResult = props => {
   }
 
   const getValue = async (queryString) => {
-        
+    setNumberTimesFetched(prevState => prevState + 1)
     const res = await Promise.resolve(searchWikipedia(queryString));
     // displayWikiResults(res)
+    if (!res.length && data.artistAlphaSort && numberTimesFetched < 3) {
+      getValue(data.artistAlphaSort)
+    }
     setWikiResults(res)
   }
 
   useEffect(() => {
     if (data.objectID) {
-      console.log(data)
-      const searchValue = data.artistAlphaSort ? data.artistAlphaSort : `${data.title} ${data.department}`;
-      // const searchValue = `${data.artistAlphaSort}  ${data.title} ${data.department}`;
+  
+      const updatedTitle = truncateString(data.title, 20)
+      const searchValue = data.artistAlphaSort ? `${data.artistAlphaSort} ${updatedTitle}` : `${updatedTitle} ${data.department}`;
       if (searchValue) {
+        // getValue(data.artistAlphaSort)
         getValue(searchValue)
       }
     
@@ -85,38 +91,30 @@ const SearchResult = props => {
   }
 
 
-  const displayWikiResults = (results) => {
-    results.forEach(result => {
-      const url = `https://en.wikipedia.org/?curid=${result.pageid}`;
-
-      // const searchResults = document.querySelector('.js-search-results');
-
-      // Append the search result to the DOM
-      // searchResults.insertAdjacentHTML(
-      //   'beforeend',
-      //   `<li class="result-item">
-      //     <h3 class="result-title">
-      //       <a href="${url}" target="_blank" rel="noopener">${result.title}</a>
-      //     </h3>
-      //     <span class="result-snippet">${result.snippet}...</span><br>
-      //   </li>`
-      // );
-    })
-
-  }
-
   return (
     <Layout pageTitle={data.title}>
+           <Head>
+     
+        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:image" content={data.primaryImageSmall} />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="200" />
+        <meta property="og:image:height" content="200"></meta>
+
+      </Head>
             <GlobalStyle lightBackgroundColor />
             <main>
               <Container>
                 <StyledHeading>{data.title}</StyledHeading>
                 <div>
                   <StyledSubHeading>Details</StyledSubHeading>
-                {data.artistDisplayName && <StyledText>Artist: {data.artistDisplayName}</StyledText> }
+                {data.artistDisplayName && <StyledText><b>Artist:</b> {data.artistDisplayName}</StyledText> }
             
-            <StyledText>Date: {data.objectDate}</StyledText>
-            <StyledText>Department: {data.department}</StyledText>
+            <StyledText><b>Date:</b> {data.objectDate}</StyledText>
+            <StyledText><b>Department:</b> {data.department}</StyledText>
+            <StyledText><b>Dimensions:</b> {data.dimensions}</StyledText>
+            <StyledText><b>Medium:</b> {data.medium}</StyledText>
+            <StyledText>Click <StyledLink href={data.objectURL} target='_blank'>here</StyledLink> to learn more from the Metropolitan Museum.</StyledText>
                 </div>
               </Container>
               <Container>

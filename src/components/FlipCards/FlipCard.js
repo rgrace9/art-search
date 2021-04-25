@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {device} from 'utils/device';
@@ -80,6 +80,34 @@ const StyledCardContent = styled.div`
   display: flex;
   /* position: relative; */
 
+
+`
+const StyledBackCardContent = styled.div`
+  min-height: 290px;
+  align-items: center;
+  display: flex;
+  position: relative;
+  .result-item {
+    padding: 5px;
+  list-style: none;
+    height: 100%;
+    min-height: 290px;
+    font-size: 20px;
+}
+
+.result-snippet {
+  max-height: 300px;
+    overflow: hidden;
+}
+.result-title {
+  font-family: ${josefinSans};
+  font-size: 1.6rem;
+  color: ${color.darkBrown};
+  text-decoration: underline;
+  a {
+    color: ${color.darkBrown};
+  }
+}
 `
 
 const StyledCardBackWrapper = styled.div`
@@ -135,7 +163,29 @@ const FlipCard = props => {
       cardBackElement.current.style.visibility = 'visible'; 
     }
   }
+
+  const displayWikiResults = (result) => {
   
+      const url = `https://en.wikipedia.org/?curid=${result.pageid}`;
+
+      const searchResults = document.querySelector(`.result--${result.pageid}`);
+
+      searchResults.insertAdjacentHTML(
+        'beforeend',
+        `<div class="result-item">
+          <h3 class="result-title">
+            <a href="${url}" target="_blank" rel="noopener">${result.title}</a>
+          </h3>
+          <span class="result-snippet">${result.snippet}...</span><br>
+        </div>`
+      );
+
+
+  }
+  
+  useEffect(() => {
+    displayWikiResults(data)
+  }, [data])
 
   return (
     <StyledCardContainer ref={cardElement}>
@@ -147,8 +197,8 @@ const FlipCard = props => {
           <StyledFlipButton aria-label='Flip Card' onClick={handleFrontFlip}><RightArrow /></StyledFlipButton>
       </StyledCardContent>
         </StyledFront>
-        <StyledBack ref={cardBackElement} className='card--back'>
-        <StyledCardContent>
+        <StyledBack ref={cardBackElement} className={`card--back`}>
+        <StyledBackCardContent className={`result--${data.pageid}`}>
           <StyledCardBackWrapper>
        
         <StyledFlipButtonBack ref={cardBackElement} aria-label='Flip Card' onClick={handleBackFlip}>
@@ -156,7 +206,7 @@ const FlipCard = props => {
           </StyledFlipButtonBack> 
 
           </StyledCardBackWrapper>
-        </StyledCardContent>
+        </StyledBackCardContent>
         </StyledBack>
     </StyledCardContainer>
   );
