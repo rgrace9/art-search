@@ -7,7 +7,7 @@ import {RightArrow} from '../Icons';
 import {josefinSans} from 'styles/font';
 
 const StyledCardContainer = styled.li`
-    background: ${color.eunry};
+    background: ${color.beige};
   display: flex;
   flex-direction: column;
   margin-top: 20px;
@@ -25,7 +25,7 @@ transition: transform 0.6s;
   min-height: 300px;
   width: 100%;
   max-width: 300px;
-  border: 2px solid ${color.navyBlue};
+  border: 4px solid ${color.navyBlue};
   padding: 1rem;
   @media ${device.tablet} {
   
@@ -148,6 +148,7 @@ const FlipCard = props => {
   const {data} = props;
   const cardElement = useRef(null);
   const cardBackElement = useRef(null);
+  const cardFrontElement = useRef(null);
   const url = `https://en.wikipedia.org/?curid=${data.pageid}`;
 
   const handleBackFlip = () => {
@@ -155,12 +156,18 @@ const FlipCard = props => {
     if (cardBackElement) {
       cardBackElement.current.style.visibility = 'hidden'; 
     }
+    if (cardFrontElement) {
+      cardFrontElement.current.style.visibility = 'visible'; 
+    }
+    
   }
-
   const handleFrontFlip = () => {
     cardElement.current.classList.toggle("flip")
     if (cardBackElement) {
       cardBackElement.current.style.visibility = 'visible'; 
+    }
+    if (cardFrontElement) {
+      cardFrontElement.current.style.visibility = 'hidden'; 
     }
   }
 
@@ -189,7 +196,7 @@ const FlipCard = props => {
 
   return (
     <StyledCardContainer ref={cardElement}>
-        <StyledFront className='card--front'>
+        <StyledFront ref={cardFrontElement}  className='card--front'>
       <StyledCardContent>
         <h3 className="result-title">
           <StyledLink href={url} target="_blank" rel="noopener">{data.title}</StyledLink>
@@ -201,7 +208,7 @@ const FlipCard = props => {
         <StyledBackCardContent className={`result--${data.pageid}`}>
           <StyledCardBackWrapper>
        
-        <StyledFlipButtonBack ref={cardBackElement} aria-label='Flip Card' onClick={handleBackFlip}>
+        <StyledFlipButtonBack aria-label='Flip Card' onClick={handleBackFlip}>
           <RightArrow />
           </StyledFlipButtonBack> 
 

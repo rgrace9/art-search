@@ -29,7 +29,6 @@ const StyledContainer = styled.ul`
   }
 
   .flip {
-    background-color: pink;
     transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
   }

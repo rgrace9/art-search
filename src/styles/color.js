@@ -7,5 +7,6 @@ export const color = {
   maroon: '#1F0A03',
   lightCream: '#f2f0e4',
   navyBlue: '#0B202E',
-  eunry: '#e8d5cf'
+  eunry: '#e8d5cf',
+  beige: '#e8d0b3',
 }
