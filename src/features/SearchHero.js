@@ -32,8 +32,6 @@ const StyledHeroContent = styled.section`
 
 const StyledInput = styled.input`
   width: 100%;
-  /* height: 76px; */
-  /* line-height: 76px; */
   border: 1px solid transparent;
   font-family: 'Amiri', serif;
   font-weight: 400;
@@ -43,11 +41,7 @@ const StyledInput = styled.input`
   color: #fdf8d6;
   position: relative;
   border-radius: 0;
-  outline: none;
-  &:focus {
-    border-radius: 0;
-    box-shadow: 0 0 0 2pt #fdf8d6;
-  }
+  line-height: 1.5;
 `
 
 const StyledLabel = styled.label`
@@ -62,8 +56,6 @@ const StyledLabel = styled.label`
 const StyledForm = styled.form`
   display: flex;
   flex-direction: row;
-  /* background: rgba(0, 0, 0, 0.8); */
-  background-color: rgb(19,10,0);
   background-color: #130A00;
   padding: 10px;
 `
@@ -78,13 +70,7 @@ const StyledButton = styled.button`
   border: 0;
   margin: 5px;
   border-radius: 0;
-  outline: none;
   padding: 2px;
-  &:focus {
-    border-radius: 0;
-    box-shadow: 0 0 0 2pt #fdf8d6;
-  }
-
 `
 const SearchHero = () => {
   const [query, setQuery] = useRecoilState(searchTextState);
@@ -110,7 +96,7 @@ const SearchHero = () => {
         <StyledHeroContent>
         <StyledForm onSubmit={onSearch} role='search'>
           <StyledLabel htmlFor='search'>Search</StyledLabel>
-            <StyledInput onChange={onInputChange} value={query} id='search' name='search' type="text" placeholder="Search" />
+            <StyledInput required placeholder='e.g. Caravaggio, dresses, jewelry, roses' onChange={onInputChange} value={query} id='search' name='search' type="text" />
             <StyledButton aria-label='Submit Search' type="submit"><Search /></StyledButton>
           </StyledForm>
      </StyledHeroContent>

@@ -141,7 +141,7 @@ const SearchFilters = props => {
         <StyledLabel htmlFor='text'>Query
 
         </StyledLabel>
-        <StyledSearchText onChange={onInputChange} value={query} placeholder='e.g. Caravaggio, dresses, jewelry, roses' id='text' name='q'/>
+        <StyledSearchText required onChange={onInputChange} value={query} placeholder='e.g. Caravaggio, dresses, jewelry, roses' id='text' name='q'/>
 
         <StyledLabel htmlFor='departmentId'>Department
 
